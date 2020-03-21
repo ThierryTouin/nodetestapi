@@ -1,6 +1,7 @@
 var express = require('express');
-const config = require('./config');
-const mongodbConnectionString = require('./config').mongoUrl;
+//const config = require('./config');
+// const mongodbConnectionString = require('./config').mongoUrl;
+const mongodbConnectionString = "mongodb+srv://admin:admin@cluster0-rsha9.mongodb.net/test?retryWrites=true&w=majority"
 var app = express();
 var port = process.env.PORT || 8080;
 
@@ -16,6 +17,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 mongoose.connect(mongodbConnectionString);
 var db = mongoose.connection;
+
+console.log('db',db);
+
 db.on('error', console.error.bind(console, 'connection error: cannot connect to my DB on mLab :('));
 db.once('open', function () {
     console.log('connected to the DB :)')
